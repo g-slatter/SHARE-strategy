@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SHARE - platform strategy</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #FAFAF7;
+  --surface: #FFFFFF;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --text: #1A1A18;
+  --text-secondary: #5F5E5A;
+  --text-muted: #888780;
+  --accent: #1D9E75;
+  --accent-bg: #E1F5EE;
+  --warm: #BA7517;
+  --warm-bg: #FAEEDA;
+  --info: #185FA5;
+  --info-bg: #E6F1FB;
+  --muted-bg: #F1EFE8;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 36px;
+  line-height: 1.55;
+  font-size: 15px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+header {
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+h1 {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+.thesis {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 780px;
+  margin: 0;
+}
+.thesis strong {
+  color: var(--text);
+  font-weight: 500;
+}
+section {
+  margin-bottom: 36px;
+}
+section > h2 {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.grid-foundation {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.grid-external {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: border-color 0.15s ease;
+}
+.card:hover {
+  border-color: var(--border-strong);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.badge-live { background: var(--accent-bg); color: var(--accent); }
+.badge-developed { background: var(--info-bg); color: var(--info); }
+.badge-consultancy { background: var(--info-bg); color: var(--info); }
+.badge-developing { background: var(--warm-bg); color: var(--warm); }
+.badge-nascent { background: var(--muted-bg); color: var(--text-secondary); }
+.card-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.card-summary strong {
+  color: var(--text);
+  font-weight: 500;
+}
+details {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+details summary {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "▸";
+  font-size: 10px;
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+details summary:hover { color: var(--text); }
+.detail-content {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.detail-content dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.detail-content dt {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.detail-content dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+.detail-content dd strong { color: var(--text); font-weight: 500; }
+.flywheel {
+  background: var(--muted-bg);
+  border-radius: 14px;
+  padding: 24px 28px;
+}
+.flywheel-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.flywheel-grid p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.flywheel-grid p strong { color: var(--text); font-weight: 500; }
+svg { width: 100%; height: auto; max-width: 260px; }
+.icon-svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+@media (max-width: 720px) {
+  .grid-foundation, .grid-external { grid-template-columns: 1fr; }
+  .flywheel-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SHARE - platform strategy</h1>
+  <p class="thesis"><strong>SHARE is a CSS business first, built to compound.</strong> The affiliate-CSS operation is the company today: effectively all of current revenue, and the source of the proprietary asset (<strong>commerce + conversion data across many merchants and channels</strong>). The evolution is from channel to network: turn the data the channel produces into products that each make the others stronger (advertisers, data, and network effects all compounding). We build for today (CSS revenue) and build what compounds. Most of what follows is direction, not yet today's business: ShareView is rolling out to clients slowly, with one client engaging on the fixed-margin model.</p>
+</header>
+
+<section>
+  <h2>The core - today's revenue (CSS)</h2>
+  <div class="grid-foundation">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--accent-bg); color: var(--accent);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5M21 7h-5"/></svg>
+          </div>
+          <h3>CSS business</h3>
+        </div>
+        <span class="badge badge-live">Core revenue</span>
+      </div>
+      <p class="card-summary">The revenue engine. A managed affiliate-CSS service across 100+ campaigns. Generates effectively all of today's income - <strong>and</strong> the proprietary data asset every other strand is built on.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>SHARE runs Google Shopping (CSS) campaigns for advertisers at scale. This is the company today and the reason the rest of the strategy is fundable.</dd>
+            <dt>Why it leads</dt>
+            <dd>Every other strand either improves this business (ShareView, CSS Brain) or monetises the data it produces (the expansion). It is the substrate, not a line item.</dd>
+            <dt>What's next</dt>
+            <dd>Protect and scale it. Confirm revenue/margin figures to anchor the all-hands narrative.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--info-bg); color: var(--info);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg>
+          </div>
+          <h3>ShareView</h3>
+        </div>
+        <span class="badge badge-developed">Live</span>
+      </div>
+      <p class="card-summary">The dashboard CSS is delivered through: the data, made transparent, that wins client budget. The endgame is a Google CSS partner combining self-serve advantages (transparency, control, PPC alignment), affiliate advantages (we invest upfront, paid on success), and a fixed-margin model.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>Web platform surfacing engine state per campaign, recommendation inbox, structural change registration, cap schedule editor. Recently extended with agentic insights and a sidecar LLM.</dd>
+            <dt>Where it stands</dt>
+            <dd>Production with internal users. Agentic insights live but needs prompt engineering; sidecar LLM details being gathered.</dd>
+            <dt>What's next</dt>
+            <dd>Roll out the fixed-margin transparency dashboard to win budget share; prompt-tune the insights agent; integrate the CSS Brain decision logic once live.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--warm-bg); color: var(--warm);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 0-4 4 4 4 0 0 0-1 7 4 4 0 0 0 5 4 4 4 0 0 0 5-4 4 4 0 0 0-1-7 4 4 0 0 0-4-4z"/><path d="M12 7v12"/></svg>
+          </div>
+          <h3>CSS Brain</h3>
+        </div>
+        <span class="badge badge-developing">App build pending</span>
+      </div>
+      <p class="card-summary">The decision logic that runs CSS. It sits between Altitude's pipeline and ShareView, recommending campaign changes for a human to approve and push. The differentiating IP, business-owned (formerly "CSS Monitor"; renamed because it now <strong>decides</strong>, not just monitors). Workbook today (v0.49, 117 campaigns); porting to a Python service.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>Pipeline (Altitude) feeds clean data; the business-owned decision logic decides what to do. Three pieces in the Brain app: per-domain engines (growth / efficiency / defensive agents), a cross-domain orchestrator, and an MCP layer for conversational ops via Cowork.</dd>
+            <dt>Where it stands</dt>
+            <dd>Workbook mature and stable; app playbook complete (Python + FastAPI + Fly.io + Postgres). Build trigger fires after 10 stable engine-days; ~2 of 10 (June 2026).</dd>
+            <dt>What's next</dt>
+            <dd>Pull the trigger; port the campaign engine to parity. The decision logic stays with the business; Altitude owns the pipeline.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>The expansion - new revenue from the same data</h2>
+  <div class="grid-external">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--info-bg); color: var(--info);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+          </div>
+          <h3>ShareMedia</h3>
+        </div>
+        <span class="badge badge-consultancy">Live - Landsec</span>
+      </div>
+      <p class="card-summary">A trusted retail media network for premium physical retail. The performance data and category intelligence from CSS become the credibility behind a retail media offer. Landsec won: the first external income.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>SHARE's commerce and category intelligence (what sells, where, and to whom) informs media across premium physical retail in ways traditional agencies, lacking cross-merchant data, cannot. This is what ShareView unlocks.</dd>
+            <dt>Where it stands</dt>
+            <dd>Landsec won. Engagement scope, deliverables, and timeline being captured.</dd>
+            <dt>What's next</dt>
+            <dd>Land Landsec well. Define a repeatable offer; decide consultancy vs productised delivery (or both).</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--accent-bg); color: var(--accent);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+          </div>
+          <h3>ShareContent</h3>
+        </div>
+        <span class="badge badge-developing">In test</span>
+      </div>
+      <p class="card-summary">A new content product for publishers. We test content featuring products <strong>from the brand's own range</strong> that match products we've seen sell across the wider platform - using our data to lift <strong>revenue per article</strong>.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>We use SHARE's cross-merchant conversion data to choose which of a brand's products to feature in an article - currently in test to see if data-matching increases revenue per article.</dd>
+            <dt>Vs Linkby</dt>
+            <dd>Linkby sells <em>clicks</em> per article; we sell <em>revenue</em> per article. Publishers prefer outcome over input, and only SHARE has the conversion data to back the match.</dd>
+            <dt>What's next</dt>
+            <dd>Read the test results. Pick pilot publishers; decide commercial structure (rev-share, CPA, flat) and product form.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: var(--muted-bg); color: var(--text-secondary);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>
+          </div>
+          <h3>ShareAgent</h3>
+        </div>
+        <span class="badge badge-nascent">Vision stage</span>
+      </div>
+      <p class="card-summary">SHARE's position in <strong>agent-led commerce</strong>: visibility, ownership and scale in a world where AI agents do the buying. A forward bet, earned by the chain rather than forced early.</p>
+      <details>
+        <summary>Detail</summary>
+        <div class="detail-content">
+          <dl>
+            <dt>What it is</dt>
+            <dd>As buying shifts to agents acting for shoppers and advertisers, SHARE wants to own a place in that flow rather than be disintermediated by it.</dd>
+            <dt>What it is not</dt>
+            <dd>Not an internal operator tool: the recommend / approve / push loop already lives in the CSS Brain decision logic. ShareAgent is the outward bet.</dd>
+            <dt>Why last</dt>
+            <dd>ShareView unlocks ShareMedia, which earns ShareAgent. The data and the retail network build the credibility that earns a defensible position.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>The data flywheel</h2>
+  <div class="flywheel">
+    <div class="flywheel-grid">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Data flywheel diagram">
+        <circle cx="110" cy="110" r="48" fill="#FFFFFF" stroke="#1D9E75" stroke-width="1.5"/>
+        <text x="110" y="105" text-anchor="middle" font-size="11" font-weight="500" fill="#1A1A18">SHARE data</text>
+        <text x="110" y="120" text-anchor="middle" font-size="9" fill="#5F5E5A">conversion + commerce</text>
+
+        <circle cx="110" cy="30" r="22" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+        <text x="110" y="27" text-anchor="middle" font-size="9" font-weight="500" fill="#0F6E56">CSS core</text>
+        <text x="110" y="37" text-anchor="middle" font-size="7" fill="#0F6E56">Brain + View</text>
+
+        <circle cx="195" cy="155" r="22" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+        <text x="195" y="158" text-anchor="middle" font-size="8" font-weight="500" fill="#5F5E5A">Expansion</text>
+
+        <circle cx="25" cy="155" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+        <text x="25" y="153" text-anchor="middle" font-size="8" font-weight="500" fill="#0C447C">Clients</text>
+        <text x="25" y="163" text-anchor="middle" font-size="7" fill="#0C447C">+ revenue</text>
+
+        <path d="M 110 53 Q 145 75 145 95" fill="none" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arr)"/>
+        <path d="M 145 130 Q 175 140 180 142" fill="none" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arr)"/>
+        <path d="M 75 130 Q 50 140 45 142" fill="none" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arr)"/>
+
+        <path d="M 25 132 Q 50 90 90 80" fill="none" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr)"/>
+        <path d="M 195 132 Q 170 90 130 80" fill="none" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr)"/>
+
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5F5E5A"/>
+          </marker>
+        </defs>
+      </svg>
+      <p><strong>How the loop compounds.</strong> The core (the CSS business, run by the CSS Brain logic and sold through ShareView) generates today's revenue and, as a byproduct, proprietary conversion data across many merchants. The expansion is a chain, not a list: <strong>ShareView unlocks ShareMedia, which earns ShareAgent</strong>, with ShareContent shaped by what we know. Each product throws off more signal back into the asset. The three growth loops compound: every advertiser makes the next easier to win, every signal sharpens the data, every participant lifts the value of all the others. The loop only spins because the core funds and feeds it.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  SHARE - platform strategy overview. Last updated 16 June 2026. Foundational doc: <code>Share_strategy.md</code>.
+</footer>
+
+</body>
+</html>
